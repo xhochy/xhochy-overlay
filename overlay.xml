@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "repositories.dtd">
+<repositories xmlns="" version="1.0">
+  <repo quality="experimental" status="unofficial">
+    <name>xhochy</name>
+    <description>xhochy's various ebuild</description>
+    <homepage>https://github.com/xhochy/gentoo-overlay</homepage>
+    <owner type="project">
+      <email>uwelk@xhochy.com</email>
+      <name>Uwe L. Korn</name>
+    </owner>
+    <source type="git">git://github.com/xhochy/gentoo-overlay.git</source>
+    <feed>https://github.com/xhochy/gentoo-overlay/commits/master.atom</feed>
+  </repo>
+</repositories>

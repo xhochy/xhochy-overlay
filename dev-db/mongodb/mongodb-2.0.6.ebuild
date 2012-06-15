@@ -17,7 +17,7 @@ SRC_URI="http://downloads.mongodb.org/src/${MY_P}.tar.gz
 LICENSE="AGPL-3 Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="mms-agent static-libs v8"
+IUSE="mms-agent static-libs v8 ssl"
 
 PDEPEND="mms-agent? ( dev-python/pymongo )"
 RDEPEND="!v8? ( <dev-lang/spidermonkey-1.8[unicode] )
@@ -42,11 +42,15 @@ pkg_setup() {
 	else
 		scons_opts+=" --usesm"
 	fi
+
+	if use ssl; then
+		scons_opts+=" --ssl"
+	fi
 }
 
 src_prepare() {
 	epatch "${FILESDIR}/${PN}-2.0-fix-scons.patch"
-
+	epatch "${FILESDIR}/${PN}-2.0-fix-scons-ssl.patch"
 	# drop -Werror
 	sed -i -e '/Werror/d' SConstruct || die
 

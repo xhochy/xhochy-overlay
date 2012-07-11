@@ -9,4 +9,10 @@ Installing the overlay
 
 (These instructions are inspired by [1])
 
+License
+-------
+
+Each ebuild should have a header indicating its license. The license may differ
+between versions.
+
 [1]: http://assaf-tech.blogspot.de/2011/02/using-github-and-layman-for-my-own.html

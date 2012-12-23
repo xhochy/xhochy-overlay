@@ -1,0 +1,41 @@
+--- Makefile	2012-10-30 11:33:07.000000000 +0400
++++ Makefile	2012-10-30 11:35:13.000000000 +0400
+@@ -12,11 +12,10 @@
+ 
+ # Fallback to gcc when $CC is not in $PATH.
+ CC:=$(shell sh -c 'type $(CC) >/dev/null 2>/dev/null && echo $(CC) || echo gcc')
+-OPTIMIZATION?=-O3
+ WARNINGS=-Wall -W -Wstrict-prototypes -Wwrite-strings
+ DEBUG?= -g -ggdb
+-REAL_CFLAGS=$(OPTIMIZATION) -fPIC $(CFLAGS) $(WARNINGS) $(DEBUG) $(ARCH)
+-REAL_LDFLAGS=$(LDFLAGS) $(ARCH)
++REAL_CFLAGS= -fPIC $(CFLAGS) $(WARNINGS) $(DEBUG)
++REAL_LDFLAGS=$(LDFLAGS)
+ 
+ DYLIBSUFFIX=so
+ STLIBSUFFIX=a
+@@ -104,7 +103,7 @@
+ 	$(CC) -MM *.c
+ 
+ # Installation related variables and target
+-PREFIX?=/usr/local
++PREFIX?=/usr/
+ INCLUDE_PATH?=include/hiredis
+ LIBRARY_PATH?=lib
+ INSTALL_INCLUDE_PATH= $(PREFIX)/$(INCLUDE_PATH)
+@@ -117,7 +116,6 @@
+ INSTALL?= cp -a
+ 
+ install: $(DYLIBNAME) $(STLIBNAME)
+-	mkdir -p $(INSTALL_INCLUDE_PATH) $(INSTALL_LIBRARY_PATH)
+ 	$(INSTALL) hiredis.h async.h adapters $(INSTALL_INCLUDE_PATH)
+ 	$(INSTALL) $(DYLIBNAME) $(INSTALL_LIBRARY_PATH)/$(DYLIB_MINOR_NAME)
+ 	cd $(INSTALL_LIBRARY_PATH) && ln -sf $(DYLIB_MINOR_NAME) $(DYLIB_MAJOR_NAME)
+@@ -143,6 +141,6 @@
+ 	genhtml --legend -o tmp/lcov/report tmp/lcov/hiredis.info
+ 
+ noopt:
+-	$(MAKE) OPTIMIZATION=""
++	$(MAKE)
+ 
+ .PHONY: all test check clean dep install 32bit gprof gcov noopt

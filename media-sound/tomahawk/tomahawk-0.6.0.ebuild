@@ -32,7 +32,7 @@ DEPEND="
 	dev-libs/qjson
 	dev-libs/quazip
 	>=media-libs/liblastfm-1.0.1
-	>=media-libs/libechonest-2.0.0
+	>=media-libs/libechonest-2.0.1
 	>=media-libs/phonon-4.5.0
 	media-libs/taglib
 	x11-libs/libX11

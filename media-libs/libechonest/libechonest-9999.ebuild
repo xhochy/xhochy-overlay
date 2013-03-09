@@ -17,10 +17,10 @@ KEYWORDS=""
 IUSE=""
 
 RDEPEND=">=dev-libs/qjson-0.5
-	x11-libs/qt-core:4"
+	dev-qt/qtcore:4"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
-	x11-libs/qt-test:4"
+	dev-qt/qttest:4"
 
 RESTRICT="test" # network access required
 

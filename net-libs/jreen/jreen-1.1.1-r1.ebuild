@@ -27,7 +27,7 @@ IUSE="debug"
 DEPEND="
 	>=app-crypt/qca-2.0.3
 	>=net-dns/libidn-1.20
-	>=dev-qt/qt-core-4.6.0:4
+	>=dev-qt/qtcore-4.6.0:4
 	>=dev-qt/qt-gui-4.6.0:4
 "
 RDEPEND="${DEPEND}"

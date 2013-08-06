@@ -3,7 +3,7 @@ Installing the overlay
 
 1. Copy xhochy-repo.xml into /etc/layman
 2. In /etc/layman/layman.cfg add a new line to ``overlays  :`` containing
-   /etc/layman/xhochy-repo.xml
+   `file:///etc/layman/xhochy-repo.xml`
 3. `layman -S`
 4. `layman -a xhochy`
 

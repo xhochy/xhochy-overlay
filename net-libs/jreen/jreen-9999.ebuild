@@ -13,7 +13,7 @@ else
 	KEYWORDS=""
 fi
 
-inherit qt4-r2 cmake-utils ${GIT_ECLASS}
+inherit cmake-utils ${GIT_ECLASS}
 
 DESCRIPTION="Qt XMPP library"
 HOMEPAGE="https://github.com/euroelessar/jreen"

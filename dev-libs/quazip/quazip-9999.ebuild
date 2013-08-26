@@ -4,8 +4,8 @@
 
 EAPI=5
 
-DESCRIPTION="A library for mapping JSON data to QVariant objects"
-HOMEPAGE="http://qjson.sourceforge.net"
+DESCRIPTION="A simple C++ wrapper over Gilles Vollant's ZIP/UNZIP package"
+HOMEPAGE="http://quazip.sourceforge.net/"
 ESVN_REPO_URI="svn://svn.code.sf.net/p/quazip/code/trunk/quazip"
 ESVN_PROJECT="quazip"
 
@@ -39,9 +39,10 @@ src_configure() {
 
 src_install() {
 	if use doc; then
-		cd doc
+		pushd doc
 		doxygen Doxyfile || die "Generating documentation failed"
 		HTML_DOCS=( doc/html/ )
+		popd
 	fi
 
 	cmake-utils_src_install

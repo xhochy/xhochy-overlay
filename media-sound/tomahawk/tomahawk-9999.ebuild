@@ -31,7 +31,7 @@ DEPEND="
 	>=dev-cpp/clucene-2.3.3.4
 	>=dev-libs/boost-1.41
 	>=dev-libs/libattica-0.4.0
-	dev-libs/qjson
+	>=dev-libs/qjson-0.8.1
 	dev-libs/quazip
 	dev-libs/qtkeychain
 	>=dev-qt/qtcore-${QT_MINIMAL}:4

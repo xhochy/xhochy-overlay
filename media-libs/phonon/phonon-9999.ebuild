@@ -50,8 +50,14 @@ COMMON_DEPEND="
 # waveout? ( media-sound/phonon-waveout )
 PDEPEND="
 	aqua? ( media-libs/phonon-qt7 )
-	gstreamer? ( media-libs/phonon-gstreamer )
-	vlc? ( >=media-libs/phonon-vlc-0.3.2 )
+	gstreamer? (
+		|| ( <media-libs/phonon-gstreamer-9999 =media-libs/phonon-gstreamer-9999[qt4=,qt5=] )
+		qt5? ( =media-libs/phonon-gstreamer-9999[qt5] )
+	)
+	vlc? (
+		|| ( ( >=media-libs/phonon-vlc-0.3.2 <media-libs/phonon-vlc-9999 ) =media-libs/phonon-vlc-9999[qt4=,qt5=] )
+		qt5? ( =media-libs/phonon-vlc-9999[qt5] )
+	)
 "
 RDEPEND="${COMMON_DEPEND}"
 DEPEND="${COMMON_DEPEND}

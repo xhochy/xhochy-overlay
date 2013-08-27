@@ -20,14 +20,24 @@ HOMEPAGE="https://projects.kde.org/projects/kdesupport/phonon"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-IUSE="aqua debug +gstreamer pulseaudio vlc zeitgeist"
+IUSE="aqua debug +gstreamer pulseaudio +qt4 qt5 vlc zeitgeist"
 
 COMMON_DEPEND="
 	!!dev-qt/qtphonon:4
-	>=dev-qt/qtcore-4.6.0:4
-	>=dev-qt/qtdbus-4.6.0:4
-	>=dev-qt/qtgui-4.6.0:4
-	>=dev-qt/qttest-4.6.0:4
+	qt4? (
+		>=dev-qt/qtcore-4.6.0:4
+		>=dev-qt/qtdbus-4.6.0:4
+		>=dev-qt/qtgui-4.6.0:4
+		>=dev-qt/qttest-4.6.0:4
+	)
+	qt5? (
+		>=dev-qt/qtcore-5.0.0:5
+		>=dev-qt/qtdbus-5.0.0:5
+		>=dev-qt/qtdeclarative-5.0.0:5
+		>=dev-qt/qtgui-5.0.0:5
+		>=dev-qt/qtopengl-5.0.0:5
+		>=dev-qt/qttest-5.0.0:5
+	)
 	pulseaudio? (
 		dev-libs/glib:2
 		>=media-sound/pulseaudio-0.9.21[glib]
@@ -45,16 +55,71 @@ PDEPEND="
 "
 RDEPEND="${COMMON_DEPEND}"
 DEPEND="${COMMON_DEPEND}
-	>=dev-util/automoc-0.9.87
+	qt4? ( >=dev-util/automoc-0.9.87 )
 	virtual/pkgconfig
 "
 
-REQUIRED_USE="|| ( aqua gstreamer vlc )"
+REQUIRED_USE="
+	|| ( aqua gstreamer vlc )
+	|| ( qt4 qt5 )
+	zeitgeist? ( qt4 )
+"
 
 src_configure() {
-	local mycmakeargs=(
-		$(cmake-utils_use_with pulseaudio GLIB2)
-		$(cmake-utils_use_with pulseaudio PulseAudio)
-	)
-	cmake-utils_src_configure
+	if use qt4; then
+		BUILD_DIR=${WORKDIR}/${P}_build-qt4
+		local mycmakeargs=(
+			$(cmake-utils_use_with pulseaudio GLIB2)
+			$(cmake-utils_use_with pulseaudio PulseAudio)
+			-DPHONON_BUILD_PHONON4QT5=OFF
+		)
+		cmake-utils_src_configure
+	fi
+
+	if use qt5; then
+		BUILD_DIR=${WORKDIR}/${P}_build-qt5
+		local mycmakeargs=(
+			$(cmake-utils_use_with pulseaudio GLIB2)
+			$(cmake-utils_use_with pulseaudio PulseAudio)
+			-DPHONON_BUILD_PHONON4QT5=ON
+		)
+		cmake-utils_src_configure
+	fi
 }
+
+src_compile() {
+	if use qt4; then
+		BUILD_DIR=${WORKDIR}/${P}_build-qt4
+		cmake-utils_src_compile
+	fi
+
+	if use qt5; then
+		BUILD_DIR=${WORKDIR}/${P}_build-qt5
+		cmake-utils_src_compile
+	fi
+}
+
+src_install() {
+	if use qt4; then
+		BUILD_DIR=${WORKDIR}/${P}_build-qt4
+		cmake-utils_src_install
+	fi
+
+	if use qt5; then
+		BUILD_DIR=${WORKDIR}/${P}_build-qt5
+		cmake-utils_src_install
+	fi
+}
+
+src_test() {
+	if use qt4; then
+		BUILD_DIR=${WORKDIR}/${P}_build-qt4
+		cmake-utils_src_test
+	fi
+
+	if use qt5; then
+		BUILD_DIR=${WORKDIR}/${P}_build-qt5
+		cmake-utils_src_test
+	fi
+}
+

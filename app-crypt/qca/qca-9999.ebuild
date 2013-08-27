@@ -38,8 +38,12 @@ REQUIRED_USE="^^ ( qt4 qt5 )"
 DOCS=( README )
 
 src_configure() {
+	if use qt5; then
+		epatch "${FILESDIR}/${PN}-qt5-pc.patch"
+	fi
+
 	# Ensure proper rpath
-	export EXTRA_QMAKE_RPATH="${EPREFIX}/usr/$(get_libdir)/qca2"
+	# export EXTRA_QMAKE_RPATH="${EPREFIX}/usr/$(get_libdir)/qca2"
 
 	local mycmakeargs=(
 		$(cmake-utils_use qt4 QT4_BUILD)
@@ -51,13 +55,8 @@ src_configure() {
 
 src_install() {
 	cmake-utils_src_install
-	
-	dodoc README TODO || die
 
-	cat <<-EOF > "${WORKDIR}"/44qca2
-	LDPATH="${EPREFIX}/usr/$(get_libdir)/qca2"
-	EOF
-	doenvd "${WORKDIR}"/44qca2 || die
+	dodoc README TODO || die
 
 	if use doc; then
 		dohtml "${S}"/apidocs/html/* || die
@@ -67,13 +66,4 @@ src_install() {
 		insinto /usr/share/doc/${PF}/
 		doins -r "${S}"/examples || die
 	fi
-
-	QT_V=qt4
-	if use qt5; then
-		QT_V=qt5
-	fi
-	# add the proper rpath for packages that do CONFIG += crypto
-	#echo "QMAKE_RPATHDIR += \"${EPREFIX}/usr/$(get_libdir)/qca2\"" >> \
-#		"${D%/}${EPREFIX}/usr/share/${QT_V}/mkspecs/features/crypto.prf" \
-#		|| die "failed to add rpath to crypto.prf"
 }

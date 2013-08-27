@@ -1,0 +1,10 @@
+--- a/qca2.pc.cmake	2013-08-27 23:18:00.261737977 +0200
++++ b/qca2.pc.cmake	2013-08-27 23:18:09.821737977 +0200
+@@ -6,6 +6,6 @@
+ Name: QCA
+ Description: Qt Cryptographic Architecture library
+ Version: @QCA_LIB_VERSION_STRING@
+-Requires: QtCore
++Requires: Qt5Core
+ Libs: -L${libdir} -l@QCA_LIB_NAME@
+ Cflags: -I${includedir}

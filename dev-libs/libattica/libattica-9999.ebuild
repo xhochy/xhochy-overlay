@@ -36,7 +36,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	qt5? (
-		dev-libs/extra-cmake-modules
+		=dev-libs/extra-cmake-modules-0.0.8
 		dev-qt/qtconcurrent:5
 	)
 	test? (

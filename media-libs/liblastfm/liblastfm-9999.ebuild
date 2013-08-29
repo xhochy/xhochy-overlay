@@ -13,7 +13,7 @@ EGIT_REPO_URI="git://github.com/lastfm/${PN}.git"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS=""
 IUSE="fingerprint +qt4 qt5 test"
 REQUIRED_USE="^^ ( qt4 qt5 )"
 

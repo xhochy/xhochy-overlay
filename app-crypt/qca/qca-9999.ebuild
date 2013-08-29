@@ -11,7 +11,7 @@ HOMEPAGE="http://delta.affinix.com/qca/"
 EGIT_REPO_URI="git://anongit.kde.org/${PN}.git"
 
 LICENSE="LGPL-2.1"
-SLOT="0"
+SLOT="2"
 KEYWORDS=""
 IUSE="cyrus-sasl debug doc examples gnupg openssl pkcs11 +qt4 qt5 test"
 
@@ -21,11 +21,11 @@ DEPEND="
 	openssl? ( >=dev-libs/openssl-0.9.6 )
 	pkcs11? (
 		>=dev-libs/openssl-0.9.6
-		=dev-libs/pkcs11-helper-1.02
+		>=dev-libs/pkcs11-helper-1.02
 	)
 	qt4? ( dev-qt/qtcore:4 )
 	qt5? (
-		dev-libs/extra-cmake-modules
+		=dev-libs/extra-cmake-modules-0.0.8
 		dev-qt/qtcore:5
 		dev-qt/qtconcurrent:5
 		dev-qt/qtnetwork:5

@@ -49,6 +49,18 @@ S=${WORKDIR}/${MY_P}
 
 DOCS=( AUTHORS )
 
+_qt4_qt5_wrapper() {
+	if use qt4; then
+		BUILD_DIR=${WORKDIR}/${P}_build-qt4
+		"${@}"
+	fi
+
+	if use qt5; then
+		BUILD_DIR=${WORKDIR}/${P}_build-qt5
+		"${@}"
+	fi
+}
+
 src_configure() {
 	if use qt4; then
 		BUILD_DIR=${WORKDIR}/${P}_build-qt4
@@ -68,39 +80,15 @@ src_configure() {
 }
 
 src_compile() {
-	if use qt4; then
-		BUILD_DIR=${WORKDIR}/${P}_build-qt4
-		cmake-utils_src_compile
-	fi
-
-	if use qt5; then
-		BUILD_DIR=${WORKDIR}/${P}_build-qt5
-		cmake-utils_src_compile
-	fi
+	_qt4_qt5_wrapper cmake-utils_src_compile
 }
 
 src_install() {
-	if use qt4; then
-		BUILD_DIR=${WORKDIR}/${P}_build-qt4
-		cmake-utils_src_install
-	fi
-
-	if use qt5; then
-		BUILD_DIR=${WORKDIR}/${P}_build-qt5
-		cmake-utils_src_install
-	fi
+	_qt4_qt5_wrapper cmake-utils_src_install
 }
 
 src_test() {
-	if use qt4; then
-		BUILD_DIR=${WORKDIR}/${P}_build-qt4
-		cmake-utils_src_test
-	fi
-
-	if use qt5; then
-		BUILD_DIR=${WORKDIR}/${P}_build-qt5
-		cmake-utils_src_test
-	fi
+	_qt4_qt5_wrapper cmake-utils_src_test
 }
 
 pkg_postinst() {

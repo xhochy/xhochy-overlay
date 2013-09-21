@@ -16,6 +16,7 @@ KEYWORDS=""
 IUSE="cyrus-sasl debug doc examples gnupg openssl pkcs11 +qt4 qt5 test"
 
 DEPEND="
+	doc? ( app-doc/doxygen )
 	cyrus-sasl? ( dev-libs/cyrus-sasl )
 	gnupg? ( app-crypt/gnupg )
 	openssl? ( >=dev-libs/openssl-0.9.6 )
@@ -23,9 +24,12 @@ DEPEND="
 		>=dev-libs/openssl-0.9.6
 		>=dev-libs/pkcs11-helper-1.02
 	)
-	qt4? ( dev-qt/qtcore:4 )
+	qt4? (
+		dev-qt/qtcore:4
+		test? ( dev-qt/qttest:4 )
+	)
 	qt5? (
-		=dev-libs/extra-cmake-modules-0.0.8
+		~dev-libs/extra-cmake-modules-0.0.8
 		dev-qt/qtcore:5
 		dev-qt/qtconcurrent:5
 		dev-qt/qtnetwork:5
@@ -35,15 +39,12 @@ RDEPEND="${DEPEND}
 	!<app-crypt/qca-1.0-r3:0"
 REQUIRED_USE="^^ ( qt4 qt5 )"
 
-DOCS=( README )
+DOCS=( README TODO )
 
 src_configure() {
 	if use qt5; then
 		epatch "${FILESDIR}/${PN}-qt5-pc.patch"
 	fi
-
-	# Ensure proper rpath
-	# export EXTRA_QMAKE_RPATH="${EPREFIX}/usr/$(get_libdir)/qca2"
 
 	local mycmakeargs=(
 		$(cmake-utils_use qt4 QT4_BUILD)
@@ -56,14 +57,13 @@ src_configure() {
 src_install() {
 	cmake-utils_src_install
 
-	dodoc README TODO || die
-
 	if use doc; then
-		dohtml "${S}"/apidocs/html/* || die
+		doxygen Doxyfile
+		dohtml "${S}"/apidocs/html/*
 	fi
 
 	if use examples; then
 		insinto /usr/share/doc/${PF}/
-		doins -r "${S}"/examples || die
+		doins -r "${S}"/examples
 	fi
 }

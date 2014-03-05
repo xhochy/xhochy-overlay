@@ -1,20 +1,20 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/liblastfm/liblastfm-1.0.7.ebuild,v 1.3 2013/08/19 14:39:30 kensington Exp $
+# $Header: $
 
 EAPI=5
 
 QT4_MINIMAL="4.8.0"
-inherit cmake-utils git-2
+inherit cmake-utils git-r3
 
-DESCRIPTION="A Qt C++ library for the Last.fm webservices"
+DESCRIPTION="Collection of libraries to integrate Last.fm services"
 HOMEPAGE="https://github.com/lastfm/liblastfm"
-EGIT_REPO_URI="git://github.com/lastfm/${PN}.git"
+EGIT_REPO_URI=( "git://github.com/lastfm/${PN}" )
 
 LICENSE="GPL-3"
-SLOT="0"
 KEYWORDS=""
-IUSE="fingerprint +qt4 qt5 test"
+SLOT="0/0"
+IUSE="fingerprint test +qt4 qt5"
 REQUIRED_USE="^^ ( qt4 qt5 )"
 
 COMMON_DEPEND="
@@ -45,12 +45,11 @@ RDEPEND="${COMMON_DEPEND}
 	!<media-libs/lastfmlib-0.4.0
 "
 
-# 1 of 2 is failing, last checked version 1.0.7
+# 1 of 2 is failing, last checked 2012-06-22 / version 1.0.1
 RESTRICT="test"
 
 src_configure() {
 	# demos not working
-	# qt5 support broken
 	local mycmakeargs=(
 		-DBUILD_DEMOS=OFF
 		$(cmake-utils_use_build qt4 WITH_QT4)

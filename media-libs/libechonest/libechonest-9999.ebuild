@@ -17,13 +17,14 @@ KEYWORDS=""
 IUSE="+qt4 qt5"
 REQUIRED_USE="^^ ( qt4 qt5 )"
 
+RESTRICT="test" # Networking required
+
 RDEPEND="
 	qt4? (
-	>=dev-libs/qjson-0.5[qt4(+)]
+		>=dev-libs/qjson-0.5[qt4(+)]
 		dev-qt/qtcore:4
 	)
 	qt5? (
-		=dev-libs/qjson-9999[qt5]
 		dev-qt/qtcore:5
 		dev-qt/qtnetwork:5
 		dev-qt/qtxml:5
@@ -31,8 +32,6 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
-	qt4? ( dev-qt/qttest:4 )
-	qt5? ( dev-qt/qttest:5 )
 "
 
 RESTRICT="test" # network access required
@@ -41,6 +40,7 @@ DOCS=( AUTHORS README TODO )
 
 src_configure() {
 	local mycmakeargs=(
+		-DECHONEST_BUILD_TESTS=OFF
 		$(cmake-utils_use qt4 BUILD_WITH_QT4)
 	)
 

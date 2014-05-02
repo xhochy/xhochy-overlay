@@ -9,13 +9,12 @@ HOMEPAGE="http://projects.kde.org/projects/playground/libs/libechonest"
 GIT_ECLASS="git-r3"
 EGIT_REPO_URI="git://github.com/lfranchi/libechonest.git"
 
-inherit cmake-utils ${GIT_ECLASS}
+inherit cmake-utils multibuild ${GIT_ECLASS}
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 IUSE="+qt4 qt5"
-REQUIRED_USE="^^ ( qt4 qt5 )"
 
 RESTRICT="test" # Networking required
 
@@ -38,11 +37,41 @@ RESTRICT="test" # network access required
 
 DOCS=( AUTHORS README TODO )
 
-src_configure() {
-	local mycmakeargs=(
-		-DECHONEST_BUILD_TESTS=OFF
-		$(cmake-utils_use qt4 BUILD_WITH_QT4)
-	)
+pkg_setup() {
+	MULTIBUILD_VARIANTS=()
+	if use qt4; then
+		MULTIBUILD_VARIANTS+=(qt4)
+	fi
+	if use qt5; then
+		MULTIBUILD_VARIANTS+=(qt5)
+	fi
+}
 
-	cmake-utils_src_configure
+src_configure() {
+	myconfigure() {
+		local mycmakeargs=(
+			-DECHONEST_BUILD_TESTS=OFF
+		)
+		if [[ ${MULTIBUILD_VARIANT} = qt4 ]]; then
+			mycmakeargs+=(-DBUILD_WITH_QT4=ON)
+		fi
+		if [[ ${MULTIBUILD_VARIANT} = qt5 ]]; then
+			mycmakeargs+=(-DBUILD_WITH_QT4=OFF)
+		fi
+		cmake-utils_src_configure
+	}
+
+	multibuild_foreach_variant myconfigure
+}
+
+src_compile() {
+	multibuild_foreach_variant cmake-utils_src_compile
+}
+
+src_install() {
+	multibuild_foreach_variant cmake-utils_src_install
+}
+
+src_test() {
+	multibuild_foreach_variant cmake-utils_src_test
 }

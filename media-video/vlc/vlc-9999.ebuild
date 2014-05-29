@@ -209,12 +209,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	# Support for Qt5.
-	if use qt5 ; then
-		export UIC="/usr/lib64/qt5/bin/uic"
-		export MOC="/usr/lib64/qt5/bin/moc"
-	fi
-
 	# Remove unnecessary warnings about unimplemented pragmas on gcc for now.
 	# Need to recheck this with gcc 4.9 and every subsequent minor bump of gcc.
 	#

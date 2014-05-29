@@ -235,7 +235,7 @@ src_prepare() {
 	touch src/revision.txt || die
 
 	# Fix up broken audio when skipping using a fixed reversed bisected commit.
-	epatch "${FILESDIR}"/${PN}-2.1.0-TomWij-bisected-PA-broken-underflow.patch
+	# epatch "${FILESDIR}"/${PN}-2.1.0-TomWij-bisected-PA-broken-underflow.patch
 
 	# Disable avcodec checks when avcodec is not used.
 	sed -i 's/^#if LIBAVCODEC_VERSION_CHECK(.*)$/#if 0/' modules/codec/avcodec/fourcc.c || die

@@ -30,8 +30,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~ppc ~x86"
 
 QTC_PLUGINS=(android autotools:autotoolsprojectmanager baremetal bazaar
-	clearcase cmake:cmakeprojectmanager cvs fakevim git ios mercurial
-	perforce python:pythoneditor qnx subversion valgrind)
+	clang:clangcodemodel clearcase cmake:cmakeprojectmanager cvs fakevim git
+	ios mercurial perforce python:pythoneditor qnx subversion valgrind)
 IUSE="debug doc examples test ${QTC_PLUGINS[@]%:*}"
 
 # minimum Qt version required
@@ -49,6 +49,7 @@ CDEPEND="
 	>=dev-qt/qtscript-${QT_PV}
 	>=dev-qt/qtsql-${QT_PV}
 	>=dev-qt/qtsvg-${QT_PV}
+	clang? ( >=sys-devel/clang-3.2 )
 "
 DEPEND="${CDEPEND}
 	virtual/pkgconfig
@@ -96,7 +97,8 @@ src_configure() {
 	eqmake4 IDE_LIBRARY_BASENAME="$(get_libdir)" \
 		IDE_PACKAGE_MODE=1 \
 		TEST=$(use test && echo 1 || echo 0) \
-		USE_SYSTEM_BOTAN=1
+		USE_SYSTEM_BOTAN=1 \
+		LLVM_INSTALL_DIR=$(use clang && echo $(get_libdir))
 }
 
 src_test() {

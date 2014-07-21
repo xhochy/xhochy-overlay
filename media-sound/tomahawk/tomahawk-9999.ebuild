@@ -16,7 +16,7 @@ else
 	KEYWORDS=""
 fi
 
-DESCRIPTION="Qt playdar social music player"
+DESCRIPTION="A multi-source social music player"
 HOMEPAGE="http://tomahawk-player.org/"
 
 LICENSE="GPL-3 BSD"
@@ -28,18 +28,19 @@ REQUIRED_USE="telepathy? ( kde )"
 DEPEND="
 	app-crypt/qca:2
 	>=dev-cpp/clucene-2.3.3.4
+	dev-cpp/sparsehash
 	>=dev-libs/boost-1.41
-	dev-libs/qjson
 	dev-libs/quazip
 	dev-libs/qtkeychain
 	>=media-libs/libechonest-2.2.0:=
 	>=media-libs/liblastfm-1.0.1
-	>=media-libs/phonon-4.5.0
-	>=media-libs/taglib-1.6.0
-	x11-libs/libX11
-	jabber? ( >=net-libs/jreen-1.1.1 )
+	media-libs/phonon
+	>=media-libs/taglib-1.8.0
+	>=net-libs/gnutls-3.2
+	jabber? ( net-libs/jreen )
 	!qt5? (
 		>=dev-libs/libattica-0.4.0
+		dev-libs/qjson
 		dev-qt/designer:4
 		dev-qt/qtcore:4
 		dev-qt/qtdbus:4
@@ -49,11 +50,14 @@ DEPEND="
 		dev-qt/qtwebkit:4
 	)
 	qt5? (
-		>=dev-libs/libattica-0.4.0[qt5]
+		kde-frameworks/attica:5
 		dev-qt/designer:5
 		dev-qt/qtcore:5
+		dev-qt/qtconcurrent:5
+		dev-qt/qtdbus:5
 		dev-qt/qtsvg:5
-		dev-qt/qtwebkit:5
+		dev-qt/qtsql:5[sqlite]
+		dev-qt/qtwebkit:5[widgets]
 		dev-qt/qtwidgets:5
 	)
 	telepathy? ( net-libs/telepathy-qt )

@@ -15,7 +15,7 @@ if [ "${PV#9999}" != "${PV}" ] ; then
 	ESVN_PROJECT="libdvdnav"
 	SRC_URI=""
 else
-	SRC_URI="http://dvdnav.mplayerhq.hu/releases/${P}.tar.bz2"
+	SRC_URI="http://downloads.videolan.org/pub/videolan/libdvdnav/${PV}/${P}.tar.bz2"
 fi
 
 inherit autotools-multilib ${SCM}
@@ -38,8 +38,6 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig" # To get pkg.m4 for eautoreconf #414391
 
 DOCS=( AUTHORS ChangeLog DEVELOPMENT-POLICY.txt doc/dvd_structures NEWS README TODO )
-
-PATCHES=( "${FILESDIR}"/${PN}-4.2.0-pkgconfig.patch )
 
 src_prepare() {
 	[ "${PV#9999}" != "${PV}" ] && subversion_src_prepare

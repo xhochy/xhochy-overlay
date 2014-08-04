@@ -10,9 +10,8 @@ AUTOTOOLS_PRUNE_LIBTOOL_FILES=all
 SCM=""
 
 if [ "${PV#9999}" != "${PV}" ] ; then
-	SCM="subversion"
-	ESVN_REPO_URI="svn://svn.mplayerhq.hu/dvdnav/trunk/libdvdread"
-	ESVN_PROJECT="libdvdread"
+	SCM="git-r3"
+	EGIT_REPO_URI="git://git.videolan.org/libdvdread.git"
 	SRC_URI=""
 else
 	SRC_URI="http://downloads.videolan.org/pub/videolan/libdvdread/${PV}/${P}.tar.bz2"
@@ -40,8 +39,3 @@ RDEPEND="!<media-libs/libdvdnav-4.2.1
 DEPEND="${RDEPEND}"
 
 DOCS=( AUTHORS ChangeLog NEWS TODO README )
-
-src_prepare() {
-	[ "${PV#9999}" != "${PV}" ] && subversion_src_prepare
-	autotools-multilib_src_prepare
-}

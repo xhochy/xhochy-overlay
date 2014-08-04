@@ -75,7 +75,7 @@ RDEPEND="
 		directfb? ( dev-libs/DirectFB:0 sys-libs/zlib:0 )
 		dts? ( >=media-libs/libdca-0.0.5:0 )
 		dvbpsi? ( >=media-libs/libdvbpsi-0.2.1:0 )
-		dvd? ( >=media-libs/libdvdread-4.9:0 >=media-libs/libdvdnav-4.2.1:0 )
+		dvd? ( >=media-libs/libdvdread-4.9:0 >=media-libs/libdvdnav-4.9.0:0 )
 		elibc_glibc? ( >=sys-libs/glibc-2.8:2.2 )
 		faad? ( >=media-libs/faad2-2.6.1:0 )
 		fdk? ( media-libs/fdk-aac:0 )

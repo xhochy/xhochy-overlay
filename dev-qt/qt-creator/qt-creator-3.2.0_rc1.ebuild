@@ -78,6 +78,10 @@ src_prepare() {
 				|| die "failed to disable ${plugin%:*} plugin"
 		fi
 	done
+	if ! use clang; then
+		sed -i -re "/SUBDIRS \+= clangcodemodel/d" src/plugins/plugins.pro \
+			|| die "failed to disable clang plugin"
+	fi
 
 	# fix translations
 	sed -i -e "/^LANGUAGES =/ s:=.*:= $(l10n_get_locales):" \

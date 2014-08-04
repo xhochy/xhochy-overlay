@@ -37,7 +37,7 @@ RDEPEND=">=media-libs/libdvdread-4.2.0-r1[${MULTILIB_USEDEP}]
 DEPEND="${RDEPEND}
 	virtual/pkgconfig" # To get pkg.m4 for eautoreconf #414391
 
-DOCS=( AUTHORS ChangeLog DEVELOPMENT-POLICY.txt doc/dvd_structures NEWS README TODO )
+DOCS=( AUTHORS ChangeLog doc/dvd_structures doc/library_layout README TODO )
 
 src_prepare() {
 	[ "${PV#9999}" != "${PV}" ] && subversion_src_prepare

@@ -38,13 +38,6 @@ DEPEND="${RDEPEND}
 
 DOCS="NEWS.txt README.md"
 
-#PATCHES=(
-#	"${FILESDIR}"/${PN}-0.7-ffmpeg.patch
-#	"${FILESDIR}"/${P}-gtest.patch
-#	"${FILESDIR}"/${P}-ffmpeg2.patch
-#	"${FILESDIR}"/${P}-libav_build_fix_for_tools.patch
-#)
-
 src_configure() {
 	local mycmakeargs=(
 		$(cmake-utils_use_build tools EXAMPLES)

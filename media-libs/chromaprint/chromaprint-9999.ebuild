@@ -4,15 +4,25 @@
 
 EAPI=5
 
-inherit cmake-utils
+if [ "${PV#9999}" != "${PV}" ] ; then
+	SCM="git-r3"
+	EGIT_REPO_URI="https://bitbucket.org/acoustid/chromaprint.git"
+else
+	SRC_URI="https://bitbucket.org/acoustid/${PN}/downloads/${P}.tar.gz"
+fi
+
+inherit cmake-utils ${SCM}
 
 DESCRIPTION="A client-side library that implements a custom algorithm for extracting fingerprints"
 HOMEPAGE="http://acoustid.org/chromaprint"
-SRC_URI="https://bitbucket.org/acoustid/${PN}/downloads/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="amd64 ~ppc x86 ~amd64-fbsd"
+if [ "${PV#9999}" = "${PV}" ] ; then
+	KEYWORDS="amd64 ~ppc x86 ~amd64-fbsd"
+else
+	KEYWORDS=""
+fi
 IUSE="test tools"
 
 # note: use ffmpeg instead of fftw because it's recommended and required for tools
@@ -26,20 +36,19 @@ DEPEND="${RDEPEND}
 	)
 	tools? ( dev-libs/boost )"
 
-DOCS="NEWS.txt README.txt"
+DOCS="NEWS.txt README.md"
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-0.7-ffmpeg.patch
-	"${FILESDIR}"/${P}-gtest.patch
-	"${FILESDIR}"/${P}-ffmpeg2.patch
-	"${FILESDIR}"/${P}-libav_build_fix_for_tools.patch
-)
+#PATCHES=(
+#	"${FILESDIR}"/${PN}-0.7-ffmpeg.patch
+#	"${FILESDIR}"/${P}-gtest.patch
+#	"${FILESDIR}"/${P}-ffmpeg2.patch
+#	"${FILESDIR}"/${P}-libav_build_fix_for_tools.patch
+#)
 
 src_configure() {
 	local mycmakeargs=(
 		$(cmake-utils_use_build tools EXAMPLES)
 		$(cmake-utils_use_build test TESTS)
-		$(cmake-utils_use_build tools)
 		-DWITH_AVFFT=ON
 		)
 	cmake-utils_src_configure
@@ -52,5 +61,4 @@ src_test() {
 
 src_install() {
 	cmake-utils_src_install
-	use tools && dobin "${BUILD_DIR}"/tools/fpcollect
 }

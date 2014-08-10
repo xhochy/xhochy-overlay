@@ -4,12 +4,12 @@
   <repo quality="experimental" status="unofficial">
     <name><![CDATA[xhochy]]></name>
     <description><![CDATA[xhochy]]></description>
-    <homepage>https://github.com/xhochy/gentoo-overlay</homepage>
+    <homepage>https://github.com/xhochy/xhochy-overlay</homepage>
     <owner>
       <email>uwelk@xhochy.com</email>
       <name><![CDATA[Uwe L. Korn]]></name>
     </owner>
-    <source type="git">https://github.com/xhochy/gentoo-overlay.git</source>
+    <source type="git">https://github.com/xhochy/xhochy-overlay.git</source>
     <feed></feed>
   </repo>
 </repositories>

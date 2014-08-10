@@ -1,3 +1,6 @@
+# Copyright 1999-2014 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
 
 EAPI="3"
 
@@ -11,8 +14,9 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 # TODO RUBY dev-lang/swig
-RDEPEND="dev-util/ragel
-    dev-libs/libpcre"
+RDEPEND="
+	dev-util/ragel
+	dev-libs/libpcre"
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${PN}"
@@ -20,12 +24,12 @@ S="${WORKDIR}/${PN}"
 src_compile() {
 	# TODO do not hardcode this path
 	cd blackducksw-ohcount-d7d6124
-    # TODO RUBY ./build ruby
-    ./build ohcount || die './build failed'
+	# TODO RUBY ./build ruby
+	./build ohcount || die './build failed'
 }
 
 src_install() {
 	# TODO do not hardcode this path
 	cd blackducksw-ohcount-d7d6124
-    dobin bin/ohcount || die 'dobin failed'
+	dobin bin/ohcount || die 'dobin failed'
 }

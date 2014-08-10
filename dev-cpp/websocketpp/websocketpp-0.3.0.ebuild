@@ -4,6 +4,8 @@
 
 EAPI="5"
 
+inherit cmake-utils
+
 DESCRIPTION="C++/Boost Asio based websocket client/server library"
 HOMEPAGE="http://www.zaphoyd.com/websocketpp"
 SRC_URI="https://github.com/zaphoyd/${PN}/archive/${PV}.tar.gz"
@@ -17,8 +19,6 @@ RDEPEND="
 	boost? ( dev-libs/boost )
 "
 #	examples? ( dev-libs/openssl )
-
-inherit cmake-utils
 
 src_configure() {
 	local mycmakeargs=(

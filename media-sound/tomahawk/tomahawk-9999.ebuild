@@ -21,7 +21,7 @@ HOMEPAGE="http://tomahawk-player.org/"
 
 LICENSE="GPL-3 BSD"
 SLOT="0"
-IUSE="debug jabber kde qt5 telepathy"
+IUSE="debug jabber hatchet kde qt5 telepathy"
 
 REQUIRED_USE="telepathy? ( kde )"
 
@@ -38,6 +38,7 @@ DEPEND="
 	>=media-libs/taglib-1.8.0
 	>=net-libs/gnutls-3.2
 	jabber? ( net-libs/jreen )
+	hatchet? ( dev-cpp/websocketpp )
 	!qt5? (
 		>=dev-libs/libattica-0.4.0
 		dev-libs/qjson
@@ -72,6 +73,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DWITH_CRASHREPORTER=OFF
 		$(cmake-utils_use_with jabber Jreen)
+		$(cmake-utils_use_build hatchet HATCHET)
 		$(cmake-utils_use_with kde KDE4)
 		$(cmake-utils_use_build !qt5 WITH_QT4)
 		$(cmake-utils_use_with telepathy TelepathyQt)

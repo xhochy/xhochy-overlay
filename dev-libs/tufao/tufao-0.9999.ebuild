@@ -27,7 +27,6 @@ REQUIRED_USE="|| ( qt4 qt5 )"
 RDEPEND="
 	qt4? (
 		dev-qt/qtcore:4
-		dev-qt/qtnetwork:4
 	)
 	qt5? (
 		dev-qt/qtcore:5

@@ -25,13 +25,17 @@ RDEPEND="
 	x11-misc/xdg-utils
 	!system-wine? (
 		amd64? (
-			app-emulation/emul-linux-x86-baselibs
+			|| (
+				sys-libs/zlib[abi_x86_32]
+				app-emulation/emul-linux-x86-baselibs
+			)
 			|| (
 				media-libs/alsa-lib[abi_x86_32]
 				app-emulation/emul-linux-x86-soundlibs[-abi_x86_32]
 			)
 			|| (
 				(
+					media-libs/freetype[abi_x86_32]
 					x11-libs/libSM[abi_x86_32]
 					x11-libs/libX11[abi_x86_32]
 					x11-libs/libXau[abi_x86_32]

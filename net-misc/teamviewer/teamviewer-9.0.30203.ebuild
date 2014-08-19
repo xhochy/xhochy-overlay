@@ -26,7 +26,10 @@ RDEPEND="
 	!system-wine? (
 		amd64? (
 			app-emulation/emul-linux-x86-baselibs
-			app-emulation/emul-linux-x86-soundlibs
+			|| (
+				media-libs/alsa-lib[abi_x86_32]
+				app-emulation/emul-linux-x86-soundlibs[-abi_x86_32]
+			)
 			|| (
 				(
 					x11-libs/libSM[abi_x86_32]

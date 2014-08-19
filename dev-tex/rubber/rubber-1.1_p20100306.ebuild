@@ -4,32 +4,32 @@
 
 EAPI=5
 
-PYTHON_DEPEND="2:2.5"
+# TODO:
+# * doc generation is not optional yet
 
-inherit distutils
+PYTHON_COMPAT=( python{2_6,2_7} )
 
-IUSE=""
-
-MY_P=${PN}-${PV/*_p/}
+inherit distutils-r1
 
 DESCRIPTION="A LaTeX wrapper for automatically building documents"
 HOMEPAGE="https://launchpad.net/rubber/"
+MY_P=${PN}-${PV/*_p/}
 SRC_URI="https://launchpad.net/rubber/trunk/1.1/+download/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
+IUSE="" # doc
 KEYWORDS="~amd64 ~ppc ~x86"
 
 DEPEND="virtual/latex-base"
+DEPEND="${RDEPEND}"
+
+# Req'd for clean build by each impl
+DISTUTILS_IN_SOURCE_BUILD=1
 
 S=${WORKDIR}/${P/_p*/}
 
-pkg_setup() {
-	python_set_active_version 2
-	python_pkg_setup
-}
-
-src_configure() {
+python_configure_all() {
 	# configure script is not created by GNU autoconf
 	./configure --prefix=/usr \
 		--bindir=/usr/bin \
@@ -38,9 +38,9 @@ src_configure() {
 		--infodir=/usr/share/info || die
 }
 
-src_compile() {
-	distutils_src_compile
-
-	cd doc
-	emake all
+python_compile_all() {
+	# if use doc; then
+		cd doc
+		emake all
+	# fi
 }

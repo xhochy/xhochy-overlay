@@ -166,7 +166,7 @@ DEPEND="${RDEPEND}
 	xcb? ( x11-proto/xproto:0 )
 	app-arch/xz-utils:0
 	dev-lang/yasm:*
-	>=sys-devel/gettext-0.18.3:*
+	>=sys-devel/gettext-0.19.2:*
 	virtual/pkgconfig:*
 "
 

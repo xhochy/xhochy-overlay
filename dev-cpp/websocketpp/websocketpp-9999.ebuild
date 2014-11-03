@@ -19,12 +19,11 @@ HOMEPAGE="http://www.zaphoyd.com/websocketpp"
 
 LICENSE="BSD"
 SLOT="0"
-IUSE="boost" # examples
+IUSE="boost"
 
 RDEPEND="
 	boost? ( dev-libs/boost )
 "
-#	examples? ( dev-libs/openssl )
 
 src_configure() {
 	local mycmakeargs=(

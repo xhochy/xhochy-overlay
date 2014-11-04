@@ -46,5 +46,5 @@ src_configure() {
 }
 
 src_test() {
-	"${BUILD_DIR}"/src/test/lucenec++-tester --test_dir="${S}"/src/test/testfiles/ || die "tests failed"
+	"${BUILD_DIR}"/src/test/lucene++-tester --test_dir="${S}"/src/test/testfiles/ || die "tests failed"
 }

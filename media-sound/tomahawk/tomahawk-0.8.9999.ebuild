@@ -22,7 +22,7 @@ HOMEPAGE="http://tomahawk-player.org/"
 
 LICENSE="GPL-3 BSD"
 SLOT="0"
-IUSE="debug jabber +hatchet kde qt5 telepathy"
+IUSE="debug +jabber +hatchet kde qt5 telepathy"
 
 REQUIRED_USE="telepathy? ( kde )"
 
@@ -59,7 +59,7 @@ DEPEND="
 		dev-qt/qtdbus:5
 		dev-qt/qtsvg:5
 		dev-qt/qtsql:5[sqlite]
-		dev-qt/qtwebkit:5[widgets]
+		dev-qt/qtwebkit:5
 		dev-qt/qtwidgets:5
 	)
 	telepathy? ( net-libs/telepathy-qt )

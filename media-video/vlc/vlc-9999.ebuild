@@ -47,10 +47,10 @@ IUSE="a52 aalib alsa altivec atmo +audioqueue avahi +avcodec
 	growl httpd ieee1394 jack jpeg kate kde libass libcaca libnotify
 	libsamplerate libtiger linsys libtar lirc live lua
 	macosx-dialog-provider macosx-eyetv macosx-quartztext macosx-qtkit
-	matroska media-library mmx modplug mp3 mpeg
+	matroska media-library modplug mp3 mpeg
 	mtp musepack ncurses neon ogg omxil opencv opengl optimisememory opus
 	png +postproc projectm pulseaudio +qt4 qt5 rdp rtsp run-as-root samba
-	schroedinger sdl sdl-image sftp shout sid skins speex sse svg +swscale
+	schroedinger sdl sdl-image sftp shout sid skins speex svg +swscale
 	taglib theora tremor truetype twolame udev upnp vaapi v4l vcdx vdpau
 	vlm vnc vorbis vpx wma-fixed +X x264 +xcb xml xv zvbi"
 
@@ -338,7 +338,6 @@ src_configure() {
 		$(use_enable macosx-qtkit) \
 		$(use_enable macosx-quartztext) \
 		$(use_enable matroska mkv) \
-		$(use_enable mmx) \
 		$(use_enable modplug mod) \
 		$(use_enable mp3 mad) \
 		$(use_enable mpeg libmpeg2) \
@@ -370,7 +369,6 @@ src_configure() {
 		$(use_enable shout) \
 		$(use_enable skins skins2) \
 		$(use_enable speex) \
-		$(use_enable sse) \
 		$(use_enable svg) \
 		$(use_enable svg svgdec) \
 		$(use_enable swscale) \

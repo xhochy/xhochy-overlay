@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -21,6 +21,6 @@ RDEPEND="${DEPEND}"
 S=${WORKDIR}/${P}/c++
 
 src_prepare() {
-    epatch ${FILESDIR}/${P}-no-ldconfig.patch
-    eautoreconf
+	epatch "${FILESDIR}/${P}-no-ldconfig.patch"
+	eautoreconf
 }

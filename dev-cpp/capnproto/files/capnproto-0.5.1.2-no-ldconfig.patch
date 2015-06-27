@@ -1,0 +1,12 @@
+diff -waurp capnproto-0.5.1.2.orig/c++/Makefile.am capnproto-0.5.1.2/c++/Makefile.am
+--- capnproto-0.5.1.2.orig/c++/Makefile.am	2015-03-22 18:43:48.828141685 +0100
++++ capnproto-0.5.1.2/c++/Makefile.am	2015-03-22 18:45:22.036735635 +0100
+@@ -324,7 +324,7 @@ capnpc_c___SOURCES = src/capnp/compiler/
+ # user doesn't have root privileges), don't worry about it.
+ install-exec-hook:
+ 	ln -sf capnp $(DESTDIR)$(bindir)/capnpc
+-	ldconfig < /dev/null > /dev/null 2>&1 || true
++#	ldconfig < /dev/null > /dev/null 2>&1 || true
+ 
+ uninstall-hook:
+ 	rm -f $(DESTDIR)$(bindir)/capnpc
